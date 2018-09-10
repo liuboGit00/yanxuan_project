@@ -24,7 +24,6 @@ export default {
   },
   getDetailsInfo({commit,state},index){
     const details = state.cateGoryInfo[index]
-    console.log(details)
     commit(RECEIVE_DETAILS_INFO,{details})
   }
 }

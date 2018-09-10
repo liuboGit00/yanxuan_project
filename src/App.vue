@@ -3,7 +3,6 @@
     <keep-alive>
       <router-view />
     </keep-alive>
-    <ToTop v-if="$route.meta.showToTop"/>
     <FooterGuide v-if="$route.meta.showFooter"/>
   </div>
 </template>

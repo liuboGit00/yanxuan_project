@@ -1,5 +1,5 @@
 <template>
-  <div class="container">
+  <div class="container" ref="container" >
     <div class="tops">
       <div class="search">
         <a href="javascript:;">
@@ -11,7 +11,7 @@
         </div>
       </div>
       <div class="nav">
-        <div class="navList clearFloat" ref="navList">
+        <div class="navList clearFloat" ref="navList" v-on:scroll="handleScroll">
           <span  @click="changeNav(index)"
                  v-for="(cate,index) in homeInfo.cateList"
                   :class="{on: navIsfoc === index}" >{{cate.name}}</span>
@@ -22,7 +22,7 @@
       <div class="swiper-container">
         <div class="swiper-wrapper">
           <div class="swiper-slide" v-for="(focus,index) in homeInfo.focusList" :key="index">
-            <a href="javascript:" class="link_to_food" >
+            <a href="javascriptzc:" class="link_to_food" >
               <div class="food_container">
                 <img :src="focus.picUrl">
               </div>
@@ -35,29 +35,29 @@
     </div>
     <ul>
       <li>
-        <i class="iconfont icon-qq"></i>
+        <i class="iconfont icon-duihaocheckmark17"></i>
         <span>网易自营品牌</span>
       </li>
       <li>
-        <i class="iconfont icon-qq"></i>
+        <i class="iconfont icon-duihaocheckmark17"></i>
         <span>30天无忧退货</span>
       </li>
       <li>
-        <i class="iconfont icon-qq"></i>
+        <i class="iconfont icon-duihaocheckmark17"></i>
         <span>48小时快速退款</span>
       </li>
     </ul>
     <div class="pinpai">
       <header>
         <span>品牌制造商直供</span>
-        <i class="iconfont icon-qq"></i>
+        <i class="iconfont icon-youjiantou"></i>
       </header>
       <ul v-if="homeInfo.tagList">
         <li v-for="(tag,index) in homeInfo.tagList.slice(0,4)" :key="index">
           <p>海外制造商</p>
           <p>9.9元起</p>
           <p>上新</p>
-          <img :src="tag.picUrl" alt="">
+          <img v-lazy="tag.picUrl" alt="">
         </li>
       </ul>
     </div>
@@ -145,8 +145,8 @@
           <p class="price">${{cate.retailPrice}}</p>
         </li>
         <li>
-          <p>更多居家好</p>
-          <i class="icon icon-qq"></i>
+          <p>更多居家好物</p>
+          <i class="icon icon-xiangyou"></i>
         </li>
       </ul>
     </div>
@@ -158,6 +158,7 @@
       <p>网易公司版权所有 © 1997-</p>
       <p>食品经营许可证：JY13301080111719</p>
     </footer>
+    <ToTop />
   </div>
 </template>
 <script>
@@ -165,6 +166,8 @@
     import 'swiper/dist/css/swiper.min.css'
     import Swiper from 'swiper'
     import {mapState} from 'vuex'
+    import ToTop from '../../components/ToTop/ToTop.vue'
+
     export default {
         props: {},
         data() {
@@ -174,16 +177,24 @@
             }
         },
         mounted(){
+          console.log(window)
+            /*this.$refs.container.onscroll = function () {
+              console.log(this)
+            }*/
+          this.$refs.container.addEventListener('scroll',function () {
+            console.log(444)
+          })
+//          this.Ls_scroll()
           if (!this.homeInfo.cateList){
             return
           }
           this._computedWidth()
-
         },
         watch:{
           homeInfo(){
             this.$nextTick(() => {
               this._computedWidth()
+              this.Ls_scroll()
             })
           }
         },
@@ -191,6 +202,9 @@
           ...mapState(['homeInfo'])
         },
         methods:{
+          handleScroll(){
+            console.log('xx');
+          },
           changeNav(index){
             this.navIsfoc = index
           },
@@ -227,7 +241,21 @@
               click : true,
               scrollX: true
             })
-          }
+          },
+          Ls_scroll(){
+            console.log(333)
+            window.onscroll = () => {
+              console.log(222)
+            }
+            window.addEventListener('scroll',() => {
+              console.log(222)
+            })
+          },
+
+
+        },
+        components:{
+          ToTop
         }
     }
 </script>
@@ -321,7 +349,7 @@
           >span.swiper-pagination-bullet-active
             background #02a774
 
-    ul
+    >ul
       background-color #ffffff
       height 40px
       display flex
@@ -330,6 +358,8 @@
       justify-content space-around
       li
         line-height 40px
+        i.icon-duihaocheckmark17
+          color tomato
     .pinpai
       background-color #ffffff
       margin-top 15px
@@ -350,6 +380,8 @@
           margin 5px
           p
             line-height 16px
+            font-size 14px
+            color #333
           img
             position absolute
             top 0
@@ -400,6 +432,8 @@
               width 100%
             p
               line-height 18px
+              color #333
+              font-size 14px
             span
               color tomato
             &.all
@@ -459,6 +493,8 @@
                 width 100%
             p
               line-height 18px
+              font-size 14px
+              color #333
               &.blank
                 height 16px
               &.mark

@@ -174,6 +174,17 @@
         data() {
             return {}
         },
+        beforeRouteEnter(to,from,next){
+          console.log('进入识物组件了！！')
+          console.log(this)
+          next(comp => {
+            console.log(comp) //comp就为组件对象
+          })
+        },
+        beforeRouteLeave(to,from,next){
+          console.log('离开识物组件了！！')
+          next()
+        },
         mounted(){
           //加载页面数据
           this.$store.dispatch('getShiWuInfo')

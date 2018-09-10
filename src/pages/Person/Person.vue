@@ -4,8 +4,8 @@
     <div class="imgCon">
       <img src="../../../static/image/login.png" alt="">
     </div>
-    <div class="phoneLogin"><i class="iconfont icon-qq"></i>手机号码登陆</div>
-    <div class="emailLogin"><i class="iconfont icon-qq"></i>邮箱账号登陆</div>
+    <div class="phoneLogin" @click="$router.push('/phoneLg')"><i class="iconfont icon-qq"></i>手机号码登陆</div>
+    <div class="emailLogin" @click="$router.push('/messageLg')"><i class="iconfont icon-qq"></i>邮箱账号登陆</div>
     <p><a href="javascript:;">手机快捷注册 &gt; </a></p>
     <ul class="icons">
       <li>
@@ -24,6 +24,7 @@
       </li>
     </ul>
   </div>
+
 </template>
 <script>
     export default {
