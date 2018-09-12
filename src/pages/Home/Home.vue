@@ -177,13 +177,13 @@
             }
         },
         mounted(){
-          console.log(window)
-            /*this.$refs.container.onscroll = function () {
-              console.log(this)
-            }*/
           this.$refs.container.addEventListener('scroll',function () {
-            console.log(444)
+            console.log('xxx')
           })
+          /*window.addEventListener('scroll',function () {
+            var scrollTop = window.pageYOffset || document.documentElement.scrollTop || document.body.scrollTop
+            console.log(scrollTop)
+          })*/
 //          this.Ls_scroll()
           if (!this.homeInfo.cateList){
             return
@@ -232,7 +232,8 @@
             //左右滑动
             new BScroll('.newCon',{
               click : true,
-              scrollX: true
+              scrollX: true,
+              eventPassthrough: 'vertical'
             })
             //热销内容滑动
             const hotGoodsCon = this.$refs.hotGoodsCon
