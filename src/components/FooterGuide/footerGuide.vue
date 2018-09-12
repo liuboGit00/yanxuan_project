@@ -20,7 +20,7 @@
     </span>
     <span class="guide_item" :class="{on: $route.path === '/shopping'}" @click="$router.replace('/shopping')">
       <span class="item_icon">
-        <i class="iconfont icon-icon"></i>
+        <i class="iconfont icon-tab-bar--n"></i>
       </span>
       <span>购物车</span>
     </span>

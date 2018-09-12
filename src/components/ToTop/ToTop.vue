@@ -1,13 +1,45 @@
 <template>
-  <div class="top">
-    <i class="iconfont icon-qq"></i>
+  <div class="top" @click="toTop">
+    <i class="iconfont icon-arrowup"></i>
   </div>
 </template>
 <script>
     export default {
         props: {},
         data() {
-            return {}
+            return {
+              scrollTop: 600
+            }
+        },
+        mounted(){
+          window.onscroll = function () {
+            console.log(1111)
+          }
+        },
+        comouted:{
+          scrollTop(){
+            return document.body.scrollTop
+          }
+        },
+        methods:{
+          toTop(){
+            if (this.timer){
+              return
+            }
+            let top = document.body.scrollTop
+            this.timer = setInterval( () =>  {
+              document.body.scrollTop = document.documentElement.scrollTop =  top;
+              this.scrollTop = top
+              if (top <= 0){
+                clearInterval(this.timer)
+                this.timer = null
+              }
+              top-=20
+            })
+          }
+        },
+        watch:{
+
         }
     }
 </script>
@@ -24,5 +56,5 @@
     line-height 40px
     >i
       font-size 30px
-      color #333333
+      color #999
 </style>
